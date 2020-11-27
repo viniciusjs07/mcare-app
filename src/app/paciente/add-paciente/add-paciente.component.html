@@ -1,0 +1,642 @@
+<div class="main-content" >
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="header">
+                      <h4 class="title">Ficha do Paciente</h4>
+                  </div>
+                  <div class="content">
+                      <form [formGroup]="addForm"><br>
+                        <p>Informações Pessoais</p>
+                        <hr>
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label>Nome completo</label>
+                                      <input type="text" class="form-control" formControlName="name" placeholder="Nome do Paciente" required>
+                                  </div>
+                                  
+                              </div>
+                              <div class="col-md-3">
+                                  <div class="form-group">
+                                      <label>Gênero</label>
+                                      <input type="text" class="form-control" formControlName="gender" placeholder="Gênero" required>
+                                  </div>
+                                  
+                              </div>
+                              <div class="col-md-3">
+                                  <div class="form-group">
+                                      <label>Data de Nascimento</label>
+                                      <input type="date" class="form-control" formControlName="birthdate" required>
+                                  </div>
+                                  
+                              </div>
+                              <div class="col-md-3">
+                                  <div class="form-group">
+                                      <label>Idade</label>
+                                      <input type="text" class="form-control" formControlName="idade_date" required>
+                                  </div>
+                                  
+                              </div>
+                              <div class="col-md-3">
+                                  <div class="form-group">
+                                      <label>CPF</label>
+                                      <input type="text" class="form-control" formControlName="cpf" placeholder="CPF" required>
+                                  </div>
+                                  
+                              </div>
+                              <div class="col-md-3">
+                                  <div class="form-group">
+                                      <label>RG</label>
+                                      <input type="text" class="form-control" formControlName="registro_geral" placeholder="RG" required>
+                                  </div>
+                                  
+                              </div>
+                              <div class="col-md-3">
+                                  <div class="form-group">
+                                      <label>PIS</label>
+                                      <input type="text" class="form-control" formControlName="pis" placeholder="PIS" required>
+                                  </div>
+                                  
+                              </div>
+
+                              
+                          </div>
+
+                          <div class="row">
+                              <div class="col-md-12">
+                                  <div class="form-group">
+                                      <label>Endereço</label>
+                                      <input type="text" class="form-control" formControlName="address" placeholder="Rua, Número, Bairro, etc." required>
+                                  </div>
+                              </div>
+                          </div>
+
+                          <div class="row">
+                              <div class="col-md-4">
+                                  <div class="form-group">
+                                      <label>Cidade</label>
+                                      <input type="text" class="form-control" formControlName="city" placeholder="Cidade">
+                                  </div>
+                              </div>
+                              <div class="col-md-4">
+                                  <div class="form-group">
+                                      <label>CEP</label>
+                                      <input type="number" class="form-control" formControlName="cep" placeholder="CEP">
+                                  </div>
+                              </div>
+                          </div>
+
+                          <div class="row">
+                              <div class="col-md-4">
+                                  <div class="form-group">
+                                      <label for="exampleInputEmail1">Celular</label>
+                                      <input type="email" class="form-control" formControlName="phone" placeholder="(83) 9 9999-9999" required>
+                                  </div>
+                              </div>
+                              <div class="col-md-4">
+                                  <div class="form-group">
+                                      <label for="exampleInputEmail1">Email</label>
+                                      <input type="email" class="form-control" formControlName="email" placeholder="E-mail" >
+                                  </div>
+                              </div>
+                          </div>
+                        <br>
+                        <p>Informações Avaliativas Gerais</p>
+                        <hr>
+                        <div class="row">
+                          <div class="col-md-4">
+                                  <div class="form-group">
+                                      <label for="exampleInputEmail1">CID</label>
+                                      <input type="cid" class="form-control" formControlName="cid" placeholder="CID" >
+                                  </div>
+                              </div>
+                            <div class="col-md-4">
+                                <div class="formGroup">
+                                    <label>Alergia</label>
+                                    <select class="form-control" formControlName="allergy">
+                                        <option selected value="" disabled>O Paciente possui Alergia?</option>
+                                        <option value="Sim">Sim</option>
+                                        <option value="Não">Não</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="formGroup">
+                                    <label>Diabético</label>
+                                    <select class="form-control" formControlName="diabetic">
+                                        <option selected value="" disabled>O Paciente é Diabético?</option>
+                                        <option value="Sim">Sim</option>
+                                        <option value="Não">Não</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="formGroup">
+                                    <label >Hipertenso</label>
+                                    <select class="form-control" formControlName="hypertensive">
+                                        <option selected value="" disabled>O paciente é Hipertenso?</option>
+                                        <option value="Sim">Sim</option>
+                                        <option value="Não">Não</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="formGroup">
+                                    <label>Pneumopatia</label>
+                                    <select class="form-control" formControlName="pneumonia">
+                                        <option selected value="" disabled>O Paciente possui Pneumopatia?</option>
+                                        <option value="Sim">Sim</option>
+                                        <option value="Não">Não</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="formGroup">
+                                    <label >Asma</label>
+                                    <select class="form-control" formControlName="asthma">
+                                        <option selected value="" disabled>O Paciente possui Asma?</option>
+                                        <option value="Sim">Sim</option>
+                                        <option value="Não">Não</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="formGroup">
+                                    <label >Hipertireoidismo</label>
+                                    <select class="form-control" formControlName="hyperthyroidism">
+                                        <option selected value="" disabled>O Paciente possui Hipertireoidismo?</option>
+                                        <option value="Sim">Sim</option>
+                                        <option value="Não">Não</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="formGroup">
+                                    <label>Tabagismo</label>
+                                    <select class="form-control" formControlName="smoking">
+                                        <option selected value="" disabled>Selecione uma opção.</option>
+                                        <option value="Sim">Sim</option>
+                                        <option value="Não">Não</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="formGroup">
+                                    <label>Etilismo</label>
+                                    <select class="form-control" formControlName="alcoholism">
+                                        <option selected value="" disabled>Selecione uma opção.</option>
+                                        <option value="Sim">Sim</option>
+                                        <option value="Não">Não</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="formGroup">
+                                    <label >Cardiopata</label>
+                                    <select class="form-control" formControlName="heartDisease" >
+                                        <option selected value="" disabled>O Paciente é Cardiopata?</option>
+                                        <option value="Sim">Sim</option>
+                                        <option value="Não">Não</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="formGroup">
+                                    <label >Medicamento</label>
+                                    <select class="form-control" formControlName="userMedicine" >
+                                        <option selected value="" disabled>O Paciente utiliza Medicamento?</option>
+                                        <option value="Sim">Sim</option>
+                                        <option value="Não">Não</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-8" *ngIf="useMedicine()">
+                                <div class="form-group">
+                                    <label>Qual?</label>
+                                    <input class="form-control" formControlName="medicineDescription" type="text" placeholder="Informe os medicamentos utilizados.">
+                                </div>
+                            </div>
+                        </div>
+
+                        <br><br>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Outras informações</label>
+                                    <textarea rows="5" class="form-control" formControlName="otherInfo" placeholder="Descrição"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <p>Triagem Enfermeira do Trabalho</p>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="formGroup">
+                                    <label>Queixa Principal</label>
+                                    <select class="form-control" formControlName="allergy">
+                                        <option selected value="" disabled>O Paciente possui Queixa Principal?</option>
+                                        <option value="Sim">Sim</option>
+                                        <option value="Não">Não</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="formGroup">
+                                    <label>Tipo de  Acidente</label>
+                                    <select class="form-control" formControlName="diabetic">
+                                        <option selected value="" disabled>Qual Tipo de Acidente?</option>
+                                        <option value="Sim">Sim</option>
+                                        <option value="Não">Não</option>
+                                    </select>
+                                </div>
+                            </div>
+                             <div class="col-md-4">
+                                  <div class="form-group">
+                                      <label>História da Doença Atual</label>
+                                      <input type="text" class="form-control" formControlName="doenca_atual" placeholder="doencaatual" required>
+                                  </div>
+                                  
+                            </div>
+                            <div class="col-md-4">
+                                  <div class="form-group">
+                                      <label>Regime de Trabalho</label>
+                                      <input type="text" class="form-control" formControlName="regime_trabalho" placeholder="regime_trabalho" required>
+                                  </div>
+                                  
+                            </div> 
+                            <div class="col-md-4">
+                                  <div class="form-group">
+                                      <label>Doença Ocupacional</label>
+                                      <input type="text" class="form-control" formControlName="rdoenca_ocupacional" placeholder="rdoenca_ocupacional" required>
+                                  </div>
+                                  
+                            </div> 
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Conduta Geral</label>
+                                    <textarea rows="5" class="form-control" formControlName="condutaGeral" placeholder="Descrição"></textarea>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <br>
+                        <p>Triagem Serviço Social</p>
+                        <hr>
+                        <div class="row">
+                          <div class="col-md-4">
+                                  <div class="form-group">
+                                      <label>Escolaridade</label>
+                                      <input type="text" class="form-control" formControlName="escolaridade" placeholder="escolaridade" required>
+                                  </div>
+                                  
+                            </div>
+                            <div class="col-md-4">
+                                  <div class="form-group">
+                                      <label>Profissão</label>
+                                      <input type="text" class="form-control" formControlName="profissao" placeholder="profissao" required>
+                                  </div>
+                                  
+                            </div>
+                            <div class="col-md-4">
+                                  <div class="form-group">
+                                      <label>Local de Trabalho</label>
+                                      <input type="text" class="form-control" formControlName="local_trabalho" placeholder="local_trabalho" required>
+                                  </div>
+                                  
+                            </div>
+                            <div class="col-md-4">
+                                  <div class="form-group">
+                                      <label>Contribui para a Previdência Social?</label>
+                                      <input type="text" class="form-control" formControlName="contribuinte" placeholder="contribuinte" required>
+                                  </div>
+                                  
+                            </div>
+                            <div class="col-md-4">
+                                  <div class="form-group">
+                                      <label>Relação Saúde/Doença</label>
+                                      <input type="text" class="form-control" formControlName="rel_saude" placeholder="rel_saude" required>
+                                  </div>
+                                  
+                            </div>
+                            <div class="col-md-4">
+                                  <div class="form-group">
+                                      <label>Emissão de Comunicação Acidente de Trabalho?</label>
+                                      <input type="text" class="form-control" formControlName="emissao_cat" placeholder="emissao_cat" required>
+                                  </div>
+                                  
+                            </div>
+                            <div class="col-md-4">
+                                  <div class="form-group">
+                                      <label>SINAN Preenchido?</label>
+                                      <input type="text" class="form-control" formControlName="sinan" placeholder="sinan" required>
+                                  </div>
+                                  
+                            </div>
+                            <div class="col-md-4">
+                                  <div class="form-group">
+                                      <label>Origem do Encaminhamento</label>
+                                      <input type="text" class="form-control" formControlName="origem_enc" placeholder="origem_enc" required>
+                                  </div>
+                                  
+                            </div>
+                            <div class="col-md-4">
+                                  <div class="form-group">
+                                      <label>Situação Previdenciária</label>
+                                      <input type="text" class="form-control" formControlName="situacao_prev" placeholder="situacao_prev" required>
+                                  </div>
+                                  
+                            </div>
+
+                        </div>
+                        <br>
+                        <p>ANAMNESE PSICOLÓGICA</p>
+                        <hr>
+                        <div class="row">
+                          <div class="col-md-4">
+                                  <div class="form-group">
+                                      <label>Queixa Principal</label>
+                                      <input type="text" class="form-control" formControlName="queixa_principal" placeholder="queixa_principal" required>
+                                  </div>
+                                  
+                            </div>
+                            <div class="col-md-4">
+                                  <div class="form-group">
+                                      <label>Secundária</label>
+                                      <input type="text" class="form-control" formControlName="secundaria" placeholder="secundaria" required>
+                                  </div>
+                                  
+                            </div>
+                            <div class="col-md-4">
+                                  <div class="form-group">
+                                      <label>Sintomas</label>
+                                      <input type="text" class="form-control" formControlName="sintomas_psi" placeholder="sintomas_psi" required>
+                                  </div>
+                                  
+                            </div>
+
+                        </div> 
+                        <br>
+                        <p>Ficha Neurofuncional</p>
+                        <hr>
+                        <div class="row">
+                          <div class="col-md-4">
+                                  <div class="form-group">
+                                      <label>Q.P.</label>
+                                      <input type="text" class="form-control" formControlName="qp_neuro" placeholder="qp_neuro" required>
+                                  </div>
+                                  
+                          </div>
+                          <div class="col-md-4">
+                                  <div class="form-group">
+                                      <label>HDA</label>
+                                      <input type="text" class="form-control" formControlName="hda_neuro" placeholder="hda_neuro" required>
+                                  </div>
+                                  
+                          </div>
+                          <div class="col-md-4">
+                                  <div class="form-group">
+                                      <label>Medicação</label>
+                                      <input type="text" class="form-control" formControlName="med_neuro" placeholder="med_neuro" required>
+                                  </div>
+                                  
+                          </div>
+                          <div class="col-md-4">
+                                  <div class="form-group">
+                                      <label>História Familiar</label>
+                                      <input type="text" class="form-control" formControlName="hist_neuro" placeholder="hist_neuro" required>
+                                  </div>
+                                  
+                          </div>
+
+
+                        </div> 
+                        <br>
+                        <p>Triagem RESPIRATÓRIA</p>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="formGroup">
+                                    <label>Cirurgia Anterior</label>
+                                    <select class="form-control" formControlName="diabetic">
+                                        <option selected value="" disabled>Paciente submetido a cirurgia anteriormente?</option>
+                                        <option value="Sim">Sim</option>
+                                        <option value="Não">Não</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-8" *ngIf="useMedicine()">
+                                <div class="form-group">
+                                    <label>Qual(is)?</label>
+                                    <input class="form-control" formControlName="medicineDescription" type="text" placeholder="Informe as cirurgias realizadas.">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="formGroup">
+                                    <label >Doenças Anteriores</label>
+                                    <select class="form-control" formControlName="hypertensive">
+                                        <option selected value="" disabled>Existência de doenças anteriores?</option>
+                                        <option value="Sim">Sim</option>
+                                        <option value="Não">Não</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-8" *ngIf="useMedicine()">
+                                <div class="form-group">
+                                    <label>Qual(is)?</label>
+                                    <input class="form-control" formControlName="medicineDescription" type="text" placeholder="Informe as doenças anteriores ou pré-existentes.">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="formGroup">
+                                    <label>Internação Anterior</label>
+                                    <select class="form-control" formControlName="internacao">
+                                        <option selected value="" disabled>Teve Internação Anterior?</option>
+                                        <option value="Sim">Sim</option>
+                                        <option value="Não">Não</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                  <div class="form-group">
+                                      <label>Tabagismo-Tempo de Uso</label>
+                                      <input type="text" class="form-control" formControlName="tabagismo_tempo" placeholder="tabagismo_tempo" required>
+                                  </div>
+                                  
+                            </div>
+                            <div class="col-md-4">
+                                  <div class="form-group">
+                                      <label>Etilismo-Tempo de Uso</label>
+                                      <input type="text" class="form-control" formControlName="etilismo_tempo" placeholder="etilismo_tempo" required>
+                                  </div>
+                                  
+                            </div>
+                        </div>
+                        <br>
+                        <p>Triagem Fisioterapia Traumato-Ortopedia</p>
+                        <hr>
+                        <div class="row">
+                           <div class="col-md-4">
+                                  <div class="form-group">
+                                      <label>Diagnóstico Fisioterapêutico-CIF</label>
+                                      <input type="text" class="form-control" formControlName="diagnostico_fisio" placeholder="diagnostico_fisio" required>
+                                  </div>
+                                  
+                            </div>
+                            <div class="col-md-4">
+                                  <div class="form-group">
+                                      <label>Medicação</label>
+                                      <input type="text" class="form-control" formControlName="medicacao" placeholder="medicacao" required>
+                                  </div>
+                                  
+                            </div>
+
+                        </div>
+                        <br>
+                        <p>Triagem HIDROTERAPIA</p>
+                        <hr>
+                        <div class="row">
+                           <div class="col-md-4">
+                                  <div class="form-group">
+                                      <label>Q.P</label>
+                                      <input type="text" class="form-control" formControlName="qp_hidro" placeholder="qp_hidro" required>
+                                  </div>
+                                  
+                            </div>
+                            <div class="col-md-4">
+                                  <div class="form-group">
+                                      <label>HDA/HDP</label>
+                                      <input type="text" class="form-control" formControlName="hdp_hidro" placeholder="hdp_hidro" required>
+                                  </div>
+                                  
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>EXAME FÍSICO</label>
+                                    <textarea rows="5" class="form-control" formControlName="exame_hidro" placeholder="Descrição"></textarea>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Avaliação na Água</label>
+                                    <textarea rows="5" class="form-control" formControlName="av_agua" placeholder="Descrição"></textarea>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>CONDUTA</label>
+                                    <textarea rows="5" class="form-control" formControlName="conduta_hidro" placeholder="Descrição"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div *ngIf="!isAddForm()">
+                            <p>Histórico de Atendimentos.</p>
+                            <hr>
+                            <div>
+                                <div *ngFor="let schedule of history" class="col-md-12 card vl">
+                                    <div class="container">
+                                        <b>{{formatDate(schedule['date'])}} - {{getServicesString(schedule['services'])}}</b><br><br>
+                                        <div style="width: 80%;" class="wordWrap">
+                                            {{schedule['clinicalStory']}}
+                                        </div><br>
+                                        <u style="color: lightseagreen; cursor: pointer;" (click)="openSignalsModal(schedule['_id'])">
+                                            Ver Sinais Vitais
+                                        </u><br><br>
+                                        <b>{{schedule['professional']['name']}}</b><br>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="history.length === 0" style="text-align: center;">
+                                <h3>O Paciente ainda não possui atendimentos realizados.</h3><br>
+                            </div>
+                        </div>
+                        <br>
+                        <div *ngIf='isAddForm()'>
+                            <button type="submit" class="btn btn-info btn-fill pull-right" (click)="cadastrarOnClick()">Cadastrar</button>
+                            <button type="submit" class="btn btn-danger btn-fill pull-right" (click)="cancelarOnClick()">Cancelar</button>
+                        </div>
+                        <div *ngIf='isEditForm()'>
+                            <button type="submit" class="btn btn-info btn-fill pull-right" (click)="updatePatient()">Atualizar</button>
+                            <button type="submit" class="btn btn-danger btn-fill pull-right" (click)="cancelarOnClick()">Cancelar</button>
+                        </div>
+                        <div class="clearfix"></div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+         
+      </div>
+  </div>
+</div>
+
+<!-- Vital Signals Modal -->
+<div class="modal fade" id="signalsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title" id="myModalLabel">Sinais Vitais</h4>
+        </div>
+        <div class="modal-body" *ngIf="signalsForm">
+            <form [formGroup]="signalsForm">
+              <div class="form-group">
+                <label>Pressão Arterial</label>
+                <input type="text" class="form-control" formControlName="bloodPressure" placeholder="Informe a pressão arterial do paciente.">
+              </div>
+              <div class="form-group">
+                <label>Frequência Cardíaca</label>
+                <input type="text" class="form-control" formControlName="heartFrequency" placeholder="Informe a frequencia respiratória do paciente.">
+              </div>
+              <div class="form-group">
+                <label>Frequência Respiratória</label>
+                <input type="text" class="form-control" formControlName="breathFrequency" placeholder="Informe a frequencia respiratória do paciente.">
+              </div>
+              <div class="form-group">
+                <label>Temperatura</label>
+                <input type="text" class="form-control" formControlName="temperature" placeholder="Informe a temperatura do paciente.">
+              </div>
+              <div class="form-group">
+                <label>Dor</label>
+                <select class="form-control" formControlName="pain">
+                  <option selected disabled>Selecione o grau da dor do Paciente.</option>  
+                  <option value="Leve">Leve</option>
+                  <option value="Moderada">Moderada</option>
+                  <option value="Intensa">Intensa</option>
+                </select>
+              </div>
+              <div class="form-group" *ngIf="showLocalPain()">
+                <label>Local da Dor</label>
+                <input type="text" class="form-control" formControlName="localPain" placeholder="Informe o local da dor do paciente.">
+              </div>
+              <div class="form-group">
+                <label>Peso</label>
+                <input type="text" class="form-control" formControlName="weight" placeholder="Informe o peso do paciente.">
+              </div>
+              <div class="form-group">
+                <label>Altura</label>
+                <input type="text" class="form-control" formControlName="height" placeholder="Informe a altura do paciente.">
+              </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>

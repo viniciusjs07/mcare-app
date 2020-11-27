@@ -1,0 +1,20 @@
+<div  class="container" id="pdfContent" #pdfContent>
+  <div style="text-align: center">
+    <h4><b>Prescrição Médica</b><br>
+        <b>Clínica Bom Doutor</b>
+    </h4>
+  </div><br><br>
+  <div style="font-size: 16px;">
+    <label>Profissional: </label>&nbsp; {{professional}}<br>
+    <label>Paciente: </label>&nbsp; {{patient}}
+    <br><br>
+
+    <p style="text-align: justify">
+      {{text}}
+    </p>
+  </div>
+</div>
+<br>
+<div class="col-md-12 center-block">
+    <button class="btn btn-info btn-fill center-block" (click)="captureScreen()">Baixar como PDF</button>
+</div><br><br><br>

@@ -1,0 +1,325 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <button (click)="addAgendamentoOnclick ()" type="submit" style="left: 14px; position: relative; bottom: 10px;" class="btn btn-info btn-fill pull-left">
+        Adicionar um Agendamento
+      </button>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+      <div class="card">
+        <ul class="nav nav-tabs nav-justified">
+          <li id="status1"><a data-toggle="tab" ref="#home" (click)="loadSchedulings('Aguardando')" >Aguardando</a></li>
+          <li id="status2"><a data-toggle="tab" href="#menu1" (click)="loadSchedulings('Atendido')" >Atendidos</a></li>
+          <li id="status3"><a data-toggle="tab" href="#menu2" (click)="loadSchedulings('Não Atendido')" >Não atendidos</a></li>
+        </ul>
+        <div class="header">
+          <div class="row" *ngIf="!isProfessional()">
+            <form>
+              <div class="col-md-6">
+                <label id="professionals">Selecione o Profissional</label>
+                <select id="professionals" class="form-control" (change)="setSelectedProfessional($event.target.value)">
+                  <option id="defaultProf" selected disabled>Selecione o profissional para listar seus agendamentos</option>
+                  <option *ngFor="let professional of professionals">{{professional['name']}}</option>
+                </select>
+              </div>
+            </form>
+          </div><br>
+          <div class="row">
+            <div class="tab-content">
+              <div id="home" class="tab-pane fade in active">
+                <div class="col-md-6">
+                  <h4 class="title">Aguardando</h4>
+                  <p class="category">Todos os agendamentos com o status <b>aguardando</b></p>
+                </div>
+              </div>
+              <div id="menu1" class="tab-pane fade">
+                <div class="col-md-6">
+                  <h4 class="title">Atendidos</h4>
+                  <p class="category">Todos os agendamentos com o status <b>atendido</b></p>
+                </div>
+              </div>
+              <div id="menu2" class="tab-pane fade">
+                <div class="col-md-6">
+                  <h4 class="title">Não Atendidos</h4>
+                  <p class="category">Todos os agendamentos com o status <b>não atendido</b></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div style="float: right" class="form-group">
+                <label for="search"><b>Pesquisar</b></label><br>
+                <textarea class="form-control" id="search" class="materialize-textarea" 
+                (keyup)="onKey($event)" rows="1" placeholder="Busque por paciente."></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="content table-responsive table-full-width">
+          <div style="text-align: center;" *ngIf="showLoad">
+            <br><br>
+            <i class="fa fa-spinner fa-spin fa-3x"></i>
+          </div>
+          <table class="table table-hover table-striped" *ngIf="tableData1">
+            <thead>
+              <tr>
+                <th *ngFor="let cell of tableData1.headerRow">{{ cell }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of tableData1.dataRows; index as i">
+                <td *ngFor="let cell of row">
+                  {{ cell }}
+                </td>
+                <td style="cursor: pointer;" (click)="openModal(i)" *ngIf="!isProfessional()">
+                  <span style="color: green;" class="glyphicon glyphicon-signal" aria-hidden="true"></span>
+                  <br><small>Verificar Status</small>
+                </td>
+                <td style="cursor: pointer;" (click)="openSignalsModal(i)" *ngIf="!isProfessional()">
+                  <span style="color: red;" class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                  <br><small>Adicionar Sinais Vitais</small>
+                </td>
+                <td style="cursor: pointer;" (click)="openSignalsModal(i)" *ngIf="isProfessional()">
+                  <span style="color: red;" class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                  <br><small>Sinais Vitais</small>
+                </td>
+                <td style="cursor: pointer;" (click)="showPatientDetails(i)" *ngIf="isProfessional()">
+                  <span style="color: blue;" class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                  <br><small>Informações do Paciente</small>
+                </td>
+                <td style="cursor: pointer;" (click)="openClinicalModal(i)" *ngIf="isProfessional()">
+                  <span style="color: red;" class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                  <br><small>Adicionar História Clínica</small>
+                </td>
+                <td style="cursor: pointer;" (click)="openPriorityModal(i)" *ngIf="showOrderButton(i)">
+                    <span style="color: blue;" class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                    <br><small>Ordem de Chegada</small>
+                  </td>
+                <td style="cursor: pointer;" (click)="finishScheduling(i)" *ngIf="isProfessional() && showFinishButton(i)">
+                  <span style="color: green;" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                  <br><small>Finalizar Atendimento</small>
+                </td>
+                <!-- Uncomment to generate medical prescription -->
+                <!-- <td style="cursor: pointer;" (click)="openMedicalModal(i)" *ngIf="isProfessional()">
+                  <span style="color: teal;" class="glyphicon glyphicon-list-alt " aria-hidden="true"></span>
+                  <br><small>Gerar Precrição Médica</small>
+                </td> -->
+                <td style="cursor: pointer" *ngIf="canRemoveScheduling()">
+                  <span (click)="editSchedule(i)" class="glyphicon glyphicon-pencil"></span>
+                </td>
+                <td style="cursor: pointer" *ngIf="canRemoveScheduling()">
+                  <span *ngIf="showDeleteButton(i)" (click)="openDeleteModal(i)" class="glyphicon glyphicon-trash"></span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="text-align: center" *ngIf="filterUsers.length > 7">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item" *ngFor="let item of getPages()" id="{{item}}">
+                  <a style="cursor: pointer" class="page-link" (click)="setPageUsers(item)" >{{item}}</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<!--Status Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Status do Agendamento</h4>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="statusForm">
+          <div class="formGroup">
+              <label for="paymentoMethod">Forma de Pagamento:</label>
+              <input placeholder="{{getPaymentOption()}}" class="form-control" formControlName="paymentMethdod" id="paymentoMethod">
+          </div>
+      
+          <div class="formGroup">
+              <label for="paymentMade">Pagamento Efetuado ?</label>
+              <select class="form-control" formControlName="paymentMade" id="paymentMade">
+                  <option value="Sim">Sim</option>
+                  <option value="Não">Não</option>
+              </select>
+          </div>
+
+          <div class="formGroup">
+              <label for="paymentMade">Status: </label>
+              <select class="form-control" formControlName="status" id="paymentMade">
+                  <option value="Aguardando">Aguardando</option>
+                  <option value="Atendido">Atendido</option>
+                  <option value="Não Atendido">Não Atendido</option>
+              </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-fill" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-info btn-fill" data-dismiss="modal" (click)="updateSchedulingStatus()" >Salvar Alterações</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+
+<!-- Delete Modal -->
+<div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Remover Agendamento</h4>
+      </div>
+      <div class="modal-body">
+        <p>Tem certeza que deseja o agendamento ?</p>
+          
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-fill" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-info btn-fill" data-dismiss="modal" (click)="confirmDelete()" >Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Priority Modal -->
+<div class="modal fade" id="priorityModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title" id="myModalLabel">Adicionar ordem de Chegada.</h4>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="priorityForm">
+              <label>Ordem de Chegada: </label>
+              <input class="form-control" formControlName="priorityQueue" placeholder="Insira a informação sobre a ordem de chegada.">
+            </form>
+        </div>
+        <div class="modal-footer" *ngIf="!isProfessional()">
+          <button type="button" class="btn btn-danger btn-fill" data-dismiss="modal" >Cancelar</button>
+          <button type="button" class="btn btn-info btn-fill" data-dismiss="modal" (click)="savePriority()" >Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Vital Signals Modal -->
+<div class="modal fade" id="signalsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Adicionar Sinais Vitais</h4>
+      </div>
+      <div class="modal-body" *ngIf="signalsForm">
+          <form [formGroup]="signalsForm">
+            <div class="form-group">
+              <label>Pressão Arterial</label>
+              <input type="text" class="form-control" formControlName="bloodPressure" placeholder="Informe a pressão arterial do paciente.">
+            </div>
+            <div class="form-group">
+              <label>Frequência Cardíaca</label>
+              <input type="text" class="form-control" formControlName="heartFrequency" placeholder="Informe a frequencia respiratória do paciente.">
+            </div>
+            <div class="form-group">
+              <label>Frequência Respiratória</label>
+              <input type="text" class="form-control" formControlName="breathFrequency" placeholder="Informe a frequencia respiratória do paciente.">
+            </div>
+            <div class="form-group">
+              <label>Temperatura</label>
+              <input type="text" class="form-control" formControlName="temperature" placeholder="Informe a temperatura do paciente.">
+            </div>
+            <div class="form-group">
+              <label>Dor</label>
+              <select class="form-control" formControlName="pain">
+                <option selected disabled>Selecione o grau da dor do Paciente.</option>  
+                <option value="Leve">Leve</option>
+                <option value="Moderada">Moderada</option>
+                <option value="Intensa">Intensa</option>
+              </select>
+            </div>
+            <div class="form-group" *ngIf="showLocalPain()">
+              <label>Local da Dor</label>
+              <input type="text" class="form-control" formControlName="localPain" placeholder="Informe o local da dor do paciente.">
+            </div>
+            <div class="form-group">
+              <label>Peso</label>
+              <input type="text" class="form-control" formControlName="weight" placeholder="Informe o peso do paciente.">
+            </div>
+            <div class="form-group">
+              <label>Altura</label>
+              <input type="text" class="form-control" formControlName="height" placeholder="Informe a altura do paciente.">
+            </div>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-fill" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-info btn-fill" data-dismiss="modal" (click)="updateSchedulingSignals()">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Clinical Story Modal -->
+<div class="modal fade" id="clinicalModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">História Clínica</h4>
+      </div>
+      <div class="modal-body" *ngIf="clinicalStoryForm">
+          <form [formGroup]="clinicalStoryForm">
+            <div class="form-group">
+              <textarea id="clinicalText" formControlName="clinicalStory" placeholder="Informe a História Clínica do Paciente."></textarea>
+            </div>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-fill" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-info btn-fill" data-dismiss="modal" (click)="updateClinicalStory()">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Medical Modal -->
+<div class="modal fade" id="medicalModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Gerar prescrição médica</h4>
+      </div>
+      <div class="modal-body" >
+          <form *ngIf='prescProfessional'>
+            <label><b>Paciente:</b> </label>&nbsp;<span>{{prescPatient}}</span>
+            <br>
+            <label><b>Profissional: </b></label>&nbsp;<span>{{prescProfessional}}</span>
+            <br><br>
+            <label><b>Prescrição:</b></label>
+            <textarea id="clinicalText" class="form-control" placeholder="Digite aqui a prescrição médica do paciente" ></textarea>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-fill" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-info btn-fill" data-dismiss="modal" (click)="generatePDF()">Gerar Precrição</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

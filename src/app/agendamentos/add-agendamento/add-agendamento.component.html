@@ -1,0 +1,160 @@
+<div class="main-content" >
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="header">
+                      <h4 class="title"> Agendamento</h4>
+                  </div>
+                  <div class="content">
+                      <form [formGroup]="addForm">
+                          
+
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label>Paciente</label>
+                                      <input type="text" class="form-control" formControlName="patient_name" placeholder="Nome do Paciente">
+                                  </div>
+                                  
+                              </div>
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                    <label>Profissional:</label>
+                                    <select class="form-control" formControlName="professional_name">
+                                        <option selected value="" disabled>Selecione o profissional responsável.</option>
+                                        <option *ngFor="let professional of professionals" value="{{professional['name']}}">{{professional['name']}}</option>
+                                    </select>
+                                  </div>
+                              </div>                              
+                          </div>
+
+                          
+
+                          <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Data</label>
+                                    <input type="date" class="form-control" formControlName="date">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Tipo de Agendamento</label>
+                                    <input type="email" formControlName="schedulingType" class="form-control" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                <label>Plano de Saúde:</label>
+                                    <select class="form-control" formControlName="health_discount">
+                                        <option selected value="0">Sem plano.</option>
+                                        <option *ngFor="let plan of plans" value="{{plan['discount']}}">{{plan['name']}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                              <div class="col-md-12">
+                                  <div class="form-group">
+                                      <label>Outras informações</label>
+                                      <textarea rows="5" class="form-control" formControlName="other" placeholder="Descrição"></textarea>
+                                  </div>
+                              </div>
+                          </div>
+                          <button type="submit" class="btn btn-info btn-fill pull-right" (click)="openServicesModal()">Prosseguir</button>
+                          <button type="submit" class="btn btn-danger btn-fill pull-right" (click)="cancelarOnClick()">Cancelar</button>
+                          
+                          <div class="clearfix"></div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+         
+      </div>
+  </div>
+</div>
+
+
+<!-- Services Modal -->
+<div class="modal fade" id="servicesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title" id="myModalLabel">Serviços e Pagamentos</h4>
+        </div>
+        <div class="modal-body">
+            <p><b>Serviços Disponíveis</b></p>
+            <div class="row">
+                <div class="col-md-4" *ngFor="let service of services">
+                    <label>
+                        <input type="checkbox" id="{{service['_id']}}" (change)="onChangeCheckbox(service)" value="">
+                        &nbsp;{{service['name']}}
+                    </label>
+                </div>
+            </div>
+            <hr style="width: 5px;">
+            <form [formGroup]="addForm">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="formGroup">
+                            <label for="paymentoMethod">Forma de Pagamento:</label>
+                            <select class="form-control" formControlName="paymentMethdod" id="paymentoMethod">
+                                <option selected value="" disabled>Selecione o método de pagamento.</option>
+                                <option value="À vista">À vista</option>
+                                <option value="Cartão">Cartão</option>
+                                <option value="Mista">Mista</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="formGroup">
+                            <label for="paymentMade">Pagamento Efetuado ?</label>
+                            <select class="form-control" formControlName="paymentMade" id="paymentMade">
+                                <option selected value="" disabled>O pagamento já foi realizado?</option>
+                                <option value="Sim">Sim</option>
+                                <option value="Não">Não</option>
+                            </select>
+                        </div>
+                    </div>
+                </div><br>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Desconto</label>
+                            <input type="number" class="form-control" formControlName="discount" placeholder="Desconto">
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="showPaymentDiv()">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Valor pago no Cartão</label>
+                            <input type="number" formControlName="payInCard" class="form-control"  placeholder="Cartão">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Valor pago à Vista</label>
+                            <input type="number" formControlName="payInCash" class="form-control"  placeholder="à Vista">
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <br><br>
+            <div style="text-align: right">
+                <b>Valor Final: <span style="color: green;">{{getAtualPrice()}} R$</span></b>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger btn-fill" (click)="cancelServiceSelect()" data-dismiss="modal">Cancelar</button>
+          <button *ngIf="!isEditMode()" type="button" class="btn btn-info btn-fill" data-dismiss="modal" (click)="cadastrarOnClick()">Cadastrar Agendamento</button>
+          <button *ngIf="isEditMode()" type="button" class="btn btn-info btn-fill" data-dismiss="modal" (click)="updateScheduling()">Atualizar Agendamento</button>
+        </div>
+      </div>
+    </div>
+</div>
+  

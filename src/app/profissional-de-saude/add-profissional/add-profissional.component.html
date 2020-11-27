@@ -1,0 +1,183 @@
+<div class="main-content" >
+  <div class="container-fluid">
+      <div class="row">
+          <!-- id_profissional
+nome
+funcao
+especialidade
+cpf
+rg
+idade
+telefone
+email
+estado_civil
+LOGIN
+SENHA
+
+ -->
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="header">
+                      <h4 class="title">Ficha do Profissional</h4>
+                  </div>
+                  <div class="content">
+                      <form [formGroup]="addForm">
+                          
+
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label>Nome completo</label>
+                                      <input type="text" class="form-control" formControlName="name" placeholder="Nome do Paciente">
+                                  </div>
+                                  
+                              </div>
+                              <div class="col-md-3">
+                                  <div class="form-group">
+                                      <label>Gênero</label>
+                                      <input type="text" class="form-control" formControlName="gender" placeholder="Gênero">
+                                  </div>
+                                  
+                              </div>
+                              <div class="col-md-3">
+                                  <div class="form-group">
+                                      <label>Data de Nascimento</label>
+                                      <input type="date" class="form-control" formControlName="birthdate" placeholder="Dia/Mês/Ano">
+                                  </div>
+                              </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Função</label>
+                                    <input type="text" class="form-control" formControlName="role" placeholder="">
+                                </div>
+                                
+                            </div>
+
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                  <label>Especialidade</label>
+                                  <input type="text" class="form-control" formControlName="expertise" placeholder="">
+                              </div>
+                              
+                          </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>CPF</label>
+                                    <input type="text" class="form-control" formControlName="cpf" placeholder="000.000.000-00">
+                                </div>
+                                
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>RG</label>
+                                    <input type="text" class="form-control" formControlName="rg" placeholder="000.000.00 SDS/PB">
+                                </div>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Escolaridade</label>
+                                    <input type="text" class="form-control" formControlName="degree" placeholder="">
+                                </div>
+                                
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label>Estado civil</label>
+                                    <input type="text" class="form-control" formControlName="maritalStatus" placeholder="">
+                                </div>
+                                
+                            </div>
+                           
+                          </div>
+
+                          
+
+                          <div class="row">
+                              <div class="col-md-12">
+                                  <div class="form-group">
+                                      <label>Endereço</label>
+                                      <input type="text" class="form-control" formControlName="address" placeholder="Rua, Número, Bairro, etc.">
+                                  </div>
+                              </div>
+                          </div>
+
+                          <div class="row">
+                              <div class="col-md-4">
+                                  <div class="form-group">
+                                      <label>Cidade</label>
+                                      <input type="text" class="form-control" formControlName="city" placeholder="Cidade">
+                                  </div>
+                              </div>
+                              <div class="col-md-4">
+                                  <div class="form-group">
+                                      <label>País</label>
+                                      <input type="text" class="form-control" formControlName="country" placeholder="País">
+                                  </div>
+                              </div>
+                              <div class="col-md-4">
+                                  <div class="form-group">
+                                      <label>CEP</label>
+                                      <input type="number" class="form-control" formControlName="cep" placeholder="CEP">
+                                  </div>
+                              </div>
+                          </div>
+
+                          <div class="row">
+                              <div class="col-md-4">
+                                  <div class="form-group">
+                                      <label for="exampleInputEmail1">Celular</label>
+                                      <input type="email" class="form-control" formControlName="phone" placeholder="(83) 9 9999-9999">
+                                  </div>
+                              </div>
+                              <div class="col-md-8">
+                                  <div class="form-group">
+                                      <label for="exampleInputEmail1">Email</label>
+                                      <input type="email" class="form-control" formControlName="email" placeholder="E-mail">
+                                  </div>
+                              </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Login</label>
+                                    <input type="text" class="form-control" formControlName="login" placeholder="">
+                                </div>
+                                
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label>Senha</label>
+                                    <input type="text" class="form-control" formControlName="password" placeholder="">
+                                </div>
+                                
+                            </div>
+                           
+                          </div>
+
+                          <div class="row">
+                              <div class="col-md-12">
+                                  <div class="form-group">
+                                      <label>Outras informações</label>
+                                      <textarea rows="5" class="form-control" formControlName="other" placeholder="Descrição"></textarea>
+                                  </div>
+                              </div>
+                          </div>
+                          <button type="submit" class="btn btn-info btn-fill pull-right" (click)="cadastrarOnClick()">Cadastrar</button>
+                          <button type="submit" class="btn btn-danger btn-fill pull-right" (click)="cancelarOnClick()">Cancelar</button>
+                          
+                          <div class="clearfix"></div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+         
+      </div>
+  </div>
+</div>

@@ -1,0 +1,151 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="header">
+            <h4 class="title">Relatórios</h4>
+            <p class="category">Gere relatórios financeiros para o sistema.</p>
+          </div><hr>  
+          <div class="content">
+            <div class="form-control">
+              <label class="radio-inline"><input type="radio" value="1" name="optradio" (click)="setRadioValue(1)" checked>Gerar relatórios de uma única data.</label>
+              <label class="radio-inline"><input type="radio" value="2" name="optradio" (click)="setRadioValue(2)">Gerar relatórios de um intervalo de datas.</label>
+              <label class="radio-inline"><input type="radio" value="2" name="optradio" (click)="setRadioValue(3)">Gerar relatórios financeiro simplificado.</label>
+            </div>
+          </div>
+          <form [formGroup]="reportForm">
+            <div class="content">
+              <div class="row">
+                <div class="form-group" *ngIf="radioValue === 1">
+                  <div class="col-md-6">
+                    <label>Data </label>
+                    <input formControlName="date" type="date" class="form-control">
+                  </div>
+                </div>
+                <div class="form-group" *ngIf="radioValue === 2 || radioValue === 3">
+                  <div class="col-md-6">
+                    <label>Data Inicial </label>
+                    <input formControlName="initialDate" type="date" class="form-control">
+                  </div>
+                  <div class="col-md-6">
+                    <label>Data Final </label>
+                    <input formControlName="finalDate"  type="date" class="form-control">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="content row" *ngIf="radioValue === 1 || radioValue === 2">
+              <div class="col-md-6" *ngIf="professionals.length > 0">
+                <label>Profissional:</label>
+                <select class="form-control" formControlName="professional" >
+                    <option selected value="" disabled>Selecione o profissional responsável.</option>
+                    <option *ngFor="let professional of professionals"  value="{{professional['_id']}}">{{professional['name']}}</option>
+                </select>
+              </div>
+              <div class="col-md-6" *ngIf="professionals.length > 0">
+                <label>Porcentagem Profissional:</label>
+                <select class="form-control" id='percentValue' >
+                    <option selected value="" disabled>Selecione a porcentagem recebida Profissional.</option>
+                    <option *ngFor="let percent of getProfessionalPercents()" value="{{percent}}">{{percentToString(percent)}}</option>
+                </select>
+              </div>
+            </div>
+          </form><br>
+          <div class="col-md-12 center-block" *ngIf="!report || report.length === 0">
+            <button class="btn btn-info btn-fill center-block" (click)="generateReport()">Gerar Relatório</button>
+          </div>
+          <div class="col-md-12" style="text-align: center;"  *ngIf="report && report.length > 0">
+              <button class="btn btn-warning btn-fill" (click)="captureScreen()">Baixar PDF</button>&nbsp;
+              <button class="btn btn-warning btn-fill" (click)="generateReport()">Atualizar</button>
+          </div>
+          <div id="pdfContent" #pdfContent *ngIf="report && report.length > 0" style="padding-top: 7%;">
+            <div>  
+              <img class="center" src="../../assets/img/logo_bom_doutor.png"/>
+            </div>
+            <div style="text-align: center">
+              <h3 >Relatório de Agendamentos</h3>
+            </div>
+            <div class="content table-responsive table-full-width">
+              <table *ngIf="radioValue === 1 || radioValue === 2" class="table table-hover table-striped" >
+                <thead>
+                  <tr>
+                    <th>Data</th>
+                    <th>Profissional</th>
+                    <th>Paciente</th>
+                    <th>Serviços</th>
+                    <th>Valor do Profissional</th>
+                    <th>Valor da Clínica</th>
+                    <th>Valor Total</th>
+                    <th>Forma de Pagamento</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let schedule of report">
+                    <td style="cursor: pointer">
+                      {{formatDate(schedule['date'])}}
+                    </td>
+                    <td style="cursor: pointer">
+                      {{schedule['professional']}}
+                    </td>
+                    <td style="cursor: pointer">
+                      {{schedule['patient']}}
+                    </td>
+                    <td style="cursor: pointer">
+                      {{schedule['services']}}
+                    </td>
+                    <td>
+                      {{getProfessionalValue(schedule['finalPrice'])}}
+                    </td>
+                    <td>
+                      {{getClinicValue(schedule['finalPrice'])}}
+                    </td>
+                    <td style="cursor: pointer">
+                      {{schedule['finalPrice']}}
+                    </td>
+                    <td style="cursor: pointer">
+                      {{schedule['paymentMethdod']}}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <table *ngIf="radioValue === 3" class="table table-hover table-striped" >
+                <thead>
+                  <tr>
+                    <th>Data</th>
+                    <th>Recebimentos à Vista</th>
+                    <th>Recebimentos em cartão</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of report; index as i">
+                    <td style="cursor: pointer">
+                      {{reportKeys[i]}}
+                    </td>
+                    <td style="cursor: pointer">
+                      {{item[0]}}
+                    </td>
+                    <td style="cursor: pointer">
+                      {{item[1]}}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div *ngIf="!(radioValue === 3)" style="text-align: center">
+                <label><b>Valor total recebido pelo Profissional</b></label> {{getTotalProfessionalValue()}} R$ <br>
+                <label><b>Valor total recebido pela Clínica</b></label> {{getTotalClinicValue()}} R$ <br>
+                <label><b>Total</b></label> {{getTotalValue()}} R$
+              </div>
+              <div *ngIf="(radioValue === 3)" style="text-align: center">
+                <b>Total:</b> {{getFinancialTotalValue()[0]}} R$
+                <b style="margin-left: 10%">Valor à vista:</b>  {{getFinancialTotalValue()[1]}} R$
+                <b style="margin-left: 10%">Valor em cartão:</b> {{getFinancialTotalValue()[2]}} R$
+              </div>
+            </div>
+          </div>
+          <br><br><br><br>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

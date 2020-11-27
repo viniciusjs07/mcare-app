@@ -1,0 +1,28 @@
+<div class="wrapper">
+  <div class="container">
+    <div>
+      <img src="/assets/img/logo_bom_doutor.png" style="width: 287px;" />
+    </div>
+
+    <form class="form">
+      <input type="text" style="color: rgba(0, 0, 0, 0.87) !important" placeholder="Login" [(ngModel)]="login" [ngModelOptions]="{standalone: true}"/>
+      <input type="password" style="color: rgba(0, 0, 0, 0.87) !important"  placeholder="Senha"  [(ngModel)]="senha" [ngModelOptions]="{standalone: true}"/>
+      <button style="font-weight: 400; !important" type="submit" id="login-button" (click)="onLoginClick()">
+        Entrar
+      </button>
+    </form>
+  </div>
+
+  <ul class="bg-bubbles">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+</div>

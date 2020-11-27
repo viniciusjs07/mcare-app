@@ -1,0 +1,165 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <button type="submit" (click)="openModal()" style="left: 14px; position: relative; bottom: 10px;" class="btn btn-info btn-fill pull-left">
+        Cadastrar um novo Exame
+      </button>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <ul class="nav nav-tabs nav-justified">
+          <li id="status1"><a data-toggle="tab" ref="#home" (click)="loadExams('Exame Complementar')" >Exames Complementares</a></li>
+          <li id="status2"><a data-toggle="tab" href="#menu1" (click)="loadExams('Exame Laboratorial')" >Exames Laboratoriais</a></li>
+          <li id="status3"><a data-toggle="tab" href="#menu2" (click)="loadExams('Avaliação de Especialista')" >Avaliações de Especialistas</a></li>
+        </ul>
+          <div class="header">
+            <h4 class="title">Lista de Exames</h4>
+            <p class="category">Todos os exames cadastrados no sistema</p>
+          </div>
+          <div class="content table-responsive table-full-width">
+            <table class="table table-hover table-striped" *ngIf="tableData1">
+              <thead>
+                <tr>
+                  <th >Selecionar</th>
+                  <th *ngFor="let cell of tableData1.headerRow">{{ cell }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of tableData1.dataRows">
+                  <td> 
+                    <input type="checkbox" value="" (change)="selectExam(row[0])">
+                  </td>
+                  <td style="cursor: pointer;" *ngFor="let cell of row">
+                    {{ cell }}
+                  </td>
+                  <td style="cursor: pointer; text-align: center;" (click)="initiateRemove(row)">
+                    <span class="glyphicon glyphicon-trash"></span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" style="text-align: center;">
+      <button type="submit" class="btn btn-warning btn-fill" (click)="generateRequest()">
+        Gerar Solicitação de Exame
+      </button>&nbsp;
+      <button type="submit" class="btn btn-info btn-fill" (click)="captureScreen()" *ngIf="examRequest">
+          Baixar Solicitação de Exame
+      </button>
+    </div>
+    <div class="row">
+      <div id="pdfContent" #pdfContent *ngIf="examRequest" style="padding-top: 7%; background-color: white">
+        <div>  
+          <img class="center" src="../../assets/img/logo_bom_doutor.png"/>
+        </div>
+        <div style="text-align: center">
+          <h3><b>SOLICITAÇÃO DE EXAMES</b></h3>
+        </div>
+        <div class="container">
+          <br><br><br>
+          <b>PACIENTE: {{requestForm.get('patientName').value}}</b>
+          <br><br>
+          <b>
+            Solicito:
+          </b><br>
+          <ul>
+            <li *ngFor="let exam of requestForm.get('exams').value"><b>{{exam}}</b></li>
+          </ul>
+          <br>
+          <div *ngIf="requestForm.get('hd').value !== ''">
+            <b>HD:</b> <pre style="border: none; background-color: white; font-size: 24px;"><b>{{requestForm.get('hd').value}}</b></pre>
+          </div>
+          <br><br>
+          <b>
+            Boqueirão, {{requestForm.get('date').value}}
+          </b>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Create Modal -->
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Cadastrar Novo</h4>
+      </div>
+      <div class="modal-body" >
+          <form [formGroup]="createForm">
+            <div class="form-group">
+              <label>Nome do Exame</label>
+              <input type="text" class="form-control" formControlName="name" placeholder="Informe o nome do plano.">
+            </div>
+            <div class="form-group">
+              <label>Tipo do Exame</label>
+              <select class="form-control" formControlName="type">
+                <option value="Exame Complementar">Exame Complementar</option>
+                <option value="Exame Laboratorial">Exame Laboratorial</option>
+                <option value="Avaliação de Especialista">Avaliação de Especialista</option>
+              </select>
+            </div>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-fill" data-dismiss="modal" (click)="cancelRequest()">Cancelar</button>
+        <button type="button" class="btn btn-info btn-fill" data-dismiss="modal" (click)="createExam()" [disabled]="!createForm.valid">Cadastrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="removeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" *ngIf="examToRemove">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Remover Exame</h4>
+      </div>
+      <div class="modal-body">
+        <p>Tem certeza que deseja remover o exame <span><b>{{examToRemove}}</b></span></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-fill" data-dismiss="modal" (click)="cancelRequest()">Cancelar</button>
+        <button type="button" class="btn btn-info btn-fill" data-dismiss="modal" (click)="finishDelete()" >Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Name Modal -->
+<div class="modal fade" id="nameModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" *ngIf="requestForm">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Gerar Solicitação de Exames</h4>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="requestForm">
+          <div class="form-group">
+              <label>Nome do Paciente</label>
+              <input type="text" class="form-control" formControlName="patientName" placeholder="Informe o nome completo do Paciente.">
+          </div>
+          <div *ngIf="examTypeSelected !== 'Exame Laboratorial'" class="form-group">
+            <label>Hipótese Diagnóstica</label>
+            <textarea class="form-control" formControlName="hd" style="font-size: 24px;"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-fill" data-dismiss="modal" (click)="cancelGenerate()">Cancelar</button>
+        <button type="button" class="btn btn-info btn-fill" data-dismiss="modal" (click)="finishRequest()" [disabled]="!requestForm.valid">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>

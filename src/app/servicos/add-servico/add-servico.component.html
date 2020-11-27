@@ -1,0 +1,111 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="header"><h4 class="title">Serviço</h4></div>
+          <div class="content">
+            <form [formGroup]="addForm">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Nome</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Nome do Serviço"
+                      formControlName="name"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label>Identificação</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Identificação do Serviço"
+                      formControlName="identifier"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label>Valor</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      placeholder="Valor do Serviço"
+                      formControlName="price"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4" *ngIf="professionals.length > 0">
+                  <label>Profissional:</label>
+                  <select class="form-control" formControlName="professional_name">
+                      <option selected value="" disabled>Selecione o profissional responsável.</option>
+                      <option *ngFor="let professional of professionals" value="{{professional['name']}}">{{professional['name']}}</option>
+                  </select>
+                </div>
+              </div>
+
+             
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Outras informações</label>
+                    <textarea
+                      rows="5"
+                      class="form-control"
+                      placeholder="Descrição"
+                      formControlName="other"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="!isEditMode()">
+                  <button
+                  type="submit"
+                  class="btn btn-info btn-fill pull-right"
+                  (click)="cadastrarOnClick()"
+                >
+                  Cadastrar
+                </button>
+                <button
+                  type="submit"
+                  class="btn btn-danger btn-fill pull-right"
+                  (click)="cancelarOnClick()"
+                >
+                  Cancelar
+                </button>
+              </div>
+              <div *ngIf="isEditMode()">
+                  <button
+                  type="submit"
+                  class="btn btn-info btn-fill pull-right"
+                  (click)="updateService()"
+                >
+                  Atualizar
+                </button>
+                <button
+                  type="submit"
+                  class="btn btn-danger btn-fill pull-right"
+                  (click)="cancelarOnClick()"
+                >
+                  Cancelar
+                </button>
+              </div>
+
+
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
