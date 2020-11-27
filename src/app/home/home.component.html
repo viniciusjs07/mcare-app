@@ -74,10 +74,6 @@
                     <th>Profissional</th>
                     <th>Paciente</th>
                     <th>Serviços</th>
-                    <th>Valor do Profissional</th>
-                    <th>Valor da Clínica</th>
-                    <th>Valor Total</th>
-                    <th>Forma de Pagamento</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -93,18 +89,6 @@
                     </td>
                     <td style="cursor: pointer">
                       {{schedule['services']}}
-                    </td>
-                    <td>
-                      {{getProfessionalValue(schedule['finalPrice'])}}
-                    </td>
-                    <td>
-                      {{getClinicValue(schedule['finalPrice'])}}
-                    </td>
-                    <td style="cursor: pointer">
-                      {{schedule['finalPrice']}}
-                    </td>
-                    <td style="cursor: pointer">
-                      {{schedule['paymentMethdod']}}
                     </td>
                   </tr>
                 </tbody>
@@ -131,16 +115,6 @@
                   </tr>
                 </tbody>
               </table>
-              <div *ngIf="!(radioValue === 3)" style="text-align: center">
-                <label><b>Valor total recebido pelo Profissional</b></label> {{getTotalProfessionalValue()}} R$ <br>
-                <label><b>Valor total recebido pela Clínica</b></label> {{getTotalClinicValue()}} R$ <br>
-                <label><b>Total</b></label> {{getTotalValue()}} R$
-              </div>
-              <div *ngIf="(radioValue === 3)" style="text-align: center">
-                <b>Total:</b> {{getFinancialTotalValue()[0]}} R$
-                <b style="margin-left: 10%">Valor à vista:</b>  {{getFinancialTotalValue()[1]}} R$
-                <b style="margin-left: 10%">Valor em cartão:</b> {{getFinancialTotalValue()[2]}} R$
-              </div>
             </div>
           </div>
           <br><br><br><br>
