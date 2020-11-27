@@ -155,7 +155,7 @@ export class AddServicoComponent implements OnInit {
         request.subscribe(
             (response) => {
                 this.professionals = response['professionals'];
-                for (let professional of response['professionals']) {
+                for (const professional of response['professionals']) {
                     if (professional['_id'] === this.editProfessional) {
                         this.addForm.get('professional_name').setValue(professional['name']);
                     }
