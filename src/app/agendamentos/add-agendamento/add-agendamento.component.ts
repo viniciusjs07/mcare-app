@@ -43,7 +43,6 @@ export class AddAgendamentoComponent implements OnInit {
     public services = [];
     public checkedServices = [];
     public professionals = [];
-    public plans = [];
 
     constructor(
         public router: Router,
@@ -54,7 +53,6 @@ export class AddAgendamentoComponent implements OnInit {
 
     ngOnInit() {
         this.loadProfessionals();
-        this.loadPlans();
         if (this.isEditMode()) {
             this.loadSchedule();
         }
@@ -192,18 +190,6 @@ export class AddAgendamentoComponent implements OnInit {
                 }
                 this.addForm.get('professional_name').setValue(response['professional_name']);
                 this.addForm.get('patient_name').setValue(response['patient_name']);
-            }, (err) => {
-                console.log(err);
-            }
-        );
-    }
-
-    loadPlans() {
-        const apiRoute = environment.url + 'plans/';
-        const request = this.http.get(apiRoute, this.httpOptions);
-        request.subscribe(
-            (response) => {
-                this.plans = response['plans'];
             }, (err) => {
                 console.log(err);
             }

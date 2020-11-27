@@ -29,8 +29,6 @@
                               </div>                              
                           </div>
 
-                          
-
                           <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -38,19 +36,10 @@
                                     <input type="date" class="form-control" formControlName="date">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Tipo de Agendamento</label>
                                     <input type="email" formControlName="schedulingType" class="form-control" placeholder="">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                <label>Plano de Saúde:</label>
-                                    <select class="form-control" formControlName="health_discount">
-                                        <option selected value="0">Sem plano.</option>
-                                        <option *ngFor="let plan of plans" value="{{plan['discount']}}">{{plan['name']}}</option>
-                                    </select>
                                 </div>
                             </div>
                           </div>
