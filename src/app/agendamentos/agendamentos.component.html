@@ -138,19 +138,6 @@
       <div class="modal-body">
         <form [formGroup]="statusForm">
           <div class="formGroup">
-              <label for="paymentoMethod">Forma de Pagamento:</label>
-              <input placeholder="{{getPaymentOption()}}" class="form-control" formControlName="paymentMethdod" id="paymentoMethod">
-          </div>
-      
-          <div class="formGroup">
-              <label for="paymentMade">Pagamento Efetuado ?</label>
-              <select class="form-control" formControlName="paymentMade" id="paymentMade">
-                  <option value="Sim">Sim</option>
-                  <option value="Não">Não</option>
-              </select>
-          </div>
-
-          <div class="formGroup">
               <label for="paymentMade">Status: </label>
               <select class="form-control" formControlName="status" id="paymentMade">
                   <option value="Aguardando">Aguardando</option>

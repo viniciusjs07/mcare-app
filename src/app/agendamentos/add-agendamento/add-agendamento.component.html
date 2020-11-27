@@ -64,7 +64,7 @@
                               </div>
                           </div>
                           <button type="submit" class="btn btn-info btn-fill pull-right" (click)="openServicesModal()">Prosseguir</button>
-                          <button type="submit" class="btn btn-danger btn-fill pull-right" (click)="cancelarOnClick()">Cancelar</button>
+                          <button type="submit" class="btn btn-danger btn-fill pull-right" (click)="cancelScheduling()">Cancelar</button>
                           
                           <div class="clearfix"></div>
                       </form>
@@ -97,64 +97,15 @@
             </div>
             <hr style="width: 5px;">
             <form [formGroup]="addForm">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="formGroup">
-                            <label for="paymentoMethod">Forma de Pagamento:</label>
-                            <select class="form-control" formControlName="paymentMethdod" id="paymentoMethod">
-                                <option selected value="" disabled>Selecione o método de pagamento.</option>
-                                <option value="À vista">À vista</option>
-                                <option value="Cartão">Cartão</option>
-                                <option value="Mista">Mista</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="formGroup">
-                            <label for="paymentMade">Pagamento Efetuado ?</label>
-                            <select class="form-control" formControlName="paymentMade" id="paymentMade">
-                                <option selected value="" disabled>O pagamento já foi realizado?</option>
-                                <option value="Sim">Sim</option>
-                                <option value="Não">Não</option>
-                            </select>
-                        </div>
-                    </div>
-                </div><br>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Desconto</label>
-                            <input type="number" class="form-control" formControlName="discount" placeholder="Desconto">
-                        </div>
-                    </div>
-                </div>
-                <div class="row" *ngIf="showPaymentDiv()">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Valor pago no Cartão</label>
-                            <input type="number" formControlName="payInCard" class="form-control"  placeholder="Cartão">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Valor pago à Vista</label>
-                            <input type="number" formControlName="payInCash" class="form-control"  placeholder="à Vista">
-                        </div>
-                    </div>
-                </div>
             </form>
 
             <br><br>
-            <div style="text-align: right">
-                <b>Valor Final: <span style="color: green;">{{getAtualPrice()}} R$</span></b>
-            </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger btn-fill" (click)="cancelServiceSelect()" data-dismiss="modal">Cancelar</button>
-          <button *ngIf="!isEditMode()" type="button" class="btn btn-info btn-fill" data-dismiss="modal" (click)="cadastrarOnClick()">Cadastrar Agendamento</button>
+          <button *ngIf="!isEditMode()" type="button" class="btn btn-info btn-fill" data-dismiss="modal" (click)="registerScheduling()">Cadastrar Agendamento</button>
           <button *ngIf="isEditMode()" type="button" class="btn btn-info btn-fill" data-dismiss="modal" (click)="updateScheduling()">Atualizar Agendamento</button>
         </div>
       </div>
     </div>
 </div>
-  
