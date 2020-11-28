@@ -27,7 +27,6 @@ import {AddFuncionarioComponent} from 'app/funcionarios/add-funcionario/add-func
 import {AddProfissionalComponent} from 'app/profissional-de-saude/add-profissional/add-profissional.component';
 import {PrescricaoComponent} from 'app/agendamentos/prescricao/prescricao.component';
 import {PrecricaoService} from '../../agendamentos/precricao.service';
-import {PlanoDeSaudeComponent} from 'app/plano-de-saude/plano-de-saude.component';
 import {ExamesComponent} from 'app/exames/exames.component';
 import {DashboardComponent} from '../../dashboard/dashboard.component';
 
@@ -61,7 +60,6 @@ import {DashboardComponent} from '../../dashboard/dashboard.component';
         AddFuncionarioComponent,
         AddProfissionalComponent,
         PrescricaoComponent,
-        PlanoDeSaudeComponent,
         ExamesComponent
     ],
     providers: [PrecricaoService]
