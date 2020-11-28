@@ -101,15 +101,19 @@ export class NavbarComponent implements OnInit {
                 break;
             }
             case 'addFuncionario': {
-                titlee = 'Adiciona Funcionário'
+                titlee = 'Adiciona Funcionário';
                 break;
             }
             case 'addProfissional': {
-                titlee = 'Adiciona Profissional'
+                titlee = 'Adiciona Profissional';
+                break;
+            }
+            case 'dashboard': {
+                titlee = 'Dashboard';
                 break;
             }
             default: {
-                //statements;
+                // statements;
                 break;
             }
         }

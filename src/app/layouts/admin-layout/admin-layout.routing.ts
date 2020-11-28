@@ -20,6 +20,7 @@ import { AddProfissionalComponent } from 'app/profissional-de-saude/add-profissi
 import { PrescricaoComponent } from 'app/agendamentos/prescricao/prescricao.component';
 import { PlanoDeSaudeComponent } from 'app/plano-de-saude/plano-de-saude.component';
 import { ExamesComponent } from 'app/exames/exames.component';
+import {DashboardComponent} from '../../dashboard/dashboard.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'relatorios',      component: HomeComponent },
@@ -45,5 +46,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'agendamentos/:id/Editar',  component: AddAgendamentoComponent},
     { path: 'agendamentos/prescricao/PDF',  component: PrescricaoComponent},
     { path: 'Planos', component: PlanoDeSaudeComponent},
-    { path: 'Exames', component: ExamesComponent}
+    { path: 'Exames', component: ExamesComponent},
+    { path: 'dashboard', component: DashboardComponent},
 ];

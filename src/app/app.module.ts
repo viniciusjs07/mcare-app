@@ -15,6 +15,7 @@ import {AdminLayoutComponent} from './layouts/admin-layout/admin-layout.componen
 import {LoginComponent} from './login/login.component';
 import {HttpClientModule} from '@angular/common/http';
 import {LoginService} from './login/login.service';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
