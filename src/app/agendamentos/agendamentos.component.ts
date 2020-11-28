@@ -103,7 +103,6 @@ export class AgendamentosComponent implements OnInit {
         request.subscribe(
             (response) => {
                 const schedules = response['schedules'];
-                console.log(response['schedules']);
                 const rows = [];
                 const tails = [];
                 for (const schedule of schedules) {

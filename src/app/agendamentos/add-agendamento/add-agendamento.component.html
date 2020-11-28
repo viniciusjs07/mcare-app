@@ -30,6 +30,28 @@
                           </div>
 
                           <div class="row">
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label>CID:</label>
+                                      <select class="form-control" formControlName="cidName">
+                                          <option selected value="">Selecione a classificação internacional de doenças.</option>
+                                          <option *ngFor="let cid of cidList.names" value="{{cid}}">{{cid}}</option>
+                                      </select>
+                                  </div>
+
+                              </div>
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label>UBS:</label>
+                                      <select class="form-control" formControlName="ubsName">
+                                          <option selected value="">Selecione a unidade básica de saúde.</option>
+                                          <option *ngFor="let usb of usbList.names" value="{{usb}}">{{usb}}</option>
+                                      </select>
+                                  </div>
+                              </div>
+                          </div>
+
+                          <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Data</label>
@@ -38,10 +60,22 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Tipo de Agendamento</label>
-                                    <input type="email" formControlName="schedulingType" class="form-control" placeholder="">
+                                    <label>Tipo de Agendamento</label>
+                                    <input type="text" formControlName="schedulingType" class="form-control" placeholder="">
                                 </div>
                             </div>
+                          </div>
+
+                          <div class="row">
+                              <div class="col-md-2">
+                                  <div class="form-group">
+                                      <label>Horário:</label>
+                                      <select class="form-control" formControlName="schedulingTime">
+                                          <option selected value="" disabled>Selecione um horário.</option>
+                                          <option *ngFor="let time of timesSchedule.times" value="{{time}}">{{time}}</option>
+                                      </select>
+                                  </div>
+                              </div>
                           </div>
 
                           <div class="row">

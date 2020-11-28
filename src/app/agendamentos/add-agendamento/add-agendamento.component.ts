@@ -31,18 +31,52 @@ export class AddAgendamentoComponent implements OnInit {
         professional_name: new FormControl('', [
             Validators.required
         ]),
-        health_discount: new FormControl(0, []),
         schedulingType: new FormControl('', [
             Validators.required
         ]),
         other: new FormControl('', []),
-        services: new FormControl([], [])
+        services: new FormControl([], []),
+        cidName: new FormControl('', []),
+        ubsName: new FormControl('', []),
+        schedulingTime: new FormControl('', [
+            Validators.required
+        ]),
     });
 
 
     public services = [];
     public checkedServices = [];
     public professionals = [];
+
+    cidList = {
+        names: [
+            'CID 10 - Z57 - Exposição ocupacional a fatores de risco',
+            'CID 10 - Z57.0 - Exposição ocupacional ao ruído',
+            'CID 10 - Z57.1 - Exposição ocupacional a radiação',
+            'CID 10 - Z57.2 - Exposição ocupacional a poeira(pó)',
+            'CID 10 - Z57.3 - Exposição ocupacional a outros contaminantes do ar'
+        ]
+    };
+
+    usbList = {
+        names: [
+            'UBS Antonio Arruda',
+            'UBS Antonio Mesquita de Almeida',
+            'UBS Campos Sales',
+            'UBS Francisco Brasileiro',
+            'UBS Horacina de Almeida',
+            'UBS Jardim América I',
+            'UBS Jardim América II',
+            'UBS Jardim Tavares',
+            'UBS Plínio Lemos',
+            'UBS Tota Agra',
+            'UBS Wesley Cariri Targino'
+        ]
+    };
+
+    timesSchedule = {
+        times: ['07:30', '08:10', '08:50', '09:30', '10:10', '13:00', '13:40', '14:20', '15:00', '15:40', '16:20']
+    };
 
     constructor(
         public router: Router,
@@ -185,11 +219,13 @@ export class AddAgendamentoComponent implements OnInit {
         const request = this.http.get(apiRoute, this.httpOptions);
         request.subscribe(
             (response) => {
+                console.log('response update ', response);
                 for (const key of FORM_KEYS) {
                     this.addForm.get(key).setValue(response['schedule'][key]);
                 }
                 this.addForm.get('professional_name').setValue(response['professional_name']);
                 this.addForm.get('patient_name').setValue(response['patient_name']);
+                console.log('get form ', this.addForm.value);
             }, (err) => {
                 console.log(err);
             }
@@ -245,4 +281,4 @@ export class AddAgendamentoComponent implements OnInit {
     }
 }
 
-const FORM_KEYS = ['date', 'schedulingType', 'other', 'services'];
+const FORM_KEYS = ['date', 'schedulingType', 'other', 'services', 'ubsName', 'cidName', 'schedulingTime'];
