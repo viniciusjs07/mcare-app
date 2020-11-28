@@ -29,7 +29,8 @@ import {PrescricaoComponent} from 'app/agendamentos/prescricao/prescricao.compon
 import {PrecricaoService} from '../../agendamentos/precricao.service';
 import {ExamesComponent} from 'app/exames/exames.component';
 import {DashboardComponent} from '../../dashboard/dashboard.component';
-
+import {SchedulingDashboardComponent} from '../../dashboard/scheduling-dashboard/scheduling-dashboard.component';
+import {ChartsModule} from 'ng2-charts';
 
 @NgModule({
     imports: [
@@ -37,6 +38,7 @@ import {DashboardComponent} from '../../dashboard/dashboard.component';
         RouterModule.forChild(AdminLayoutRoutes),
         FormsModule,
         ReactiveFormsModule,
+        ChartsModule,
         LbdModule,
         NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=YOUR_KEY_HERE'})
     ],
@@ -55,6 +57,7 @@ import {DashboardComponent} from '../../dashboard/dashboard.component';
         ServicosComponent,
         AgendamentosComponent,
         AddPacienteComponent,
+        SchedulingDashboardComponent,
         AddAgendamentoComponent,
         AddServicoComponent,
         AddFuncionarioComponent,

@@ -56,30 +56,10 @@ export class HomeComponent implements OnInit {
             this.reportForm.get('initialDate').setValue('');
             this.reportForm.get('finalDate').setValue('');
             this.generateSingleReport();
-        } else if (this.radioValue === 2) {
-            this.reportForm.get('date').setValue('');
-            this.generateSingleReport();
         } else {
             this.reportForm.get('date').setValue('');
-            this.generateFinancialReport();
+            this.generateSingleReport();
         }
-    }
-
-    generateFinancialReport() {
-        const apiUrl = environment.url + 'professionals/report/simple';
-        const request = this.http.post(apiUrl, this.reportForm.value, this.httpOptions);
-        this.report = [];
-
-        request.subscribe(
-            (response) => {
-                Object['entries'](response).forEach(entry => {
-                    this.reportKeys.push(entry[0]);
-                    this.report.push(entry[1]);
-                });
-            }, (err) => {
-                console.log(err);
-            }
-        );
     }
 
     public captureScreen() {
@@ -120,7 +100,6 @@ export class HomeComponent implements OnInit {
         request.subscribe(
             (response) => {
                 this.report = response;
-                console.log(response);
                 this._notificationService.showNotification(
                     'top',
                     'right',
@@ -153,25 +132,6 @@ export class HomeComponent implements OnInit {
                 console.log(err);
             }
         );
-    }
-
-    getTotalValue() {
-        let total = 0;
-        for (let r of this.report) {
-            total = total + r['finalPrice'];
-        }
-
-        return total;
-    }
-
-    getTotalProfessionalValue() {
-        const totalValue = this.getTotalValue();
-        return ((this.professionaPercent / 100) * totalValue).toFixed(2);
-    }
-
-    getTotalClinicValue() {
-        const totalValue = this.getTotalValue();
-        return (((100 - this.professionaPercent) / 100) * totalValue).toFixed(2);
     }
 
     formatDate(date) {

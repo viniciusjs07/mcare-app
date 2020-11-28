@@ -1,0 +1,38 @@
+<div class="d-flex flex-row justify-content-between mb-3">
+    <div class="group row ">
+        <form [formGroup]="scheduleProfessional">
+            <div class="col-md-6 select-item">
+                <label id="professionals">Selecione o Profissional</label>
+                <select id="professionals" class="form-control" (change)="setSelectedProfessional($event.target.value)">
+                    <option id="defaultProf" selected disabled>Selecione o profissional para listar seus agendamentos
+                    </option>
+                    <option *ngFor="let professional of professionals">{{professional['name']}}</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Selecione a Data Inicial</label>
+                    <input (change)="setSelectedInitialDate($event.target.value)" type="date" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>Selecione a Data Final</label>
+                    <input (change)="setSelectedFinalDate($event.target.value)" type="date" class="form-control">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="main-chart">
+    <canvas baseChart
+            [data]="pieChartData"
+            [labels]="pieChartLabels"
+            [chartType]="pieChartType"
+            [options]="pieChartOptions"
+            [plugins]="pieChartPlugins"
+            [legend]="pieChartLegend">
+    </canvas>
+</div>
+

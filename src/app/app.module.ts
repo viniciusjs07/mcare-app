@@ -15,8 +15,6 @@ import {AdminLayoutComponent} from './layouts/admin-layout/admin-layout.componen
 import {LoginComponent} from './login/login.component';
 import {HttpClientModule} from '@angular/common/http';
 import {LoginService} from './login/login.service';
-import { DashboardComponent } from './dashboard/dashboard.component';
-
 
 @NgModule({
     imports: [
@@ -37,6 +35,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
         LoginComponent
     ],
     providers: [LoginService],
+    exports: [
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

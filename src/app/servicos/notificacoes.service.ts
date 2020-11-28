@@ -1,31 +1,32 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
-declare var $:any;
+declare var $: any;
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 
 export class NotificacoesService {
 
-  constructor() { }
+    constructor() {
+    }
 
-  showNotification(from, align, mensagem, cor, icone){
-    // const type = ['','info','success','warning','danger'];
-    const type = ['','info','success','warning','danger'];
+    showNotification(from, align, mensagem, cor, icone) {
+        // const type = ['','info','success','warning','danger'];
+        const type = ['', 'info', 'success', 'warning', 'danger'];
 
-    var color = cor;
-    $.notify({
-        icon: icone,
-        message: mensagem
-    },{
-        type: type[color],
-        timer: 1000,
-        placement: {
-            from: from,
-            align: align
-        }
-    });
-}
+        const color = cor;
+        $.notify({
+            icon: icone,
+            message: mensagem
+        }, {
+            type: type[color],
+            timer: 1000,
+            placement: {
+                from: from,
+                align: align
+            }
+        });
+    }
 
 }
