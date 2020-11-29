@@ -105,11 +105,9 @@ export class SchedulingDashboardComponent implements OnInit {
                             'pe-7s-close'
                         );
                         this.pieChartData = [];
-                        return;
+                    } else {
+                        this.pieChartData = [response['attended'], response['not_attended']];
                     }
-                    this.pieChartData = [response['attended'], response['not_attended']];
-                    console.log('response ', this.pieChartData);
-
                 }, (err) => {
                     console.log(err);
                 }
