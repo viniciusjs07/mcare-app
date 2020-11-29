@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ChartDataSets, ChartOptions, ChartType} from 'chart.js';
-import {Label} from 'ng2-charts';
+import {Color, Label} from 'ng2-charts';
 import {environment} from '../../../environments/environment';
 
 @Component({
@@ -15,6 +15,16 @@ export class SchedulingCidComponent implements OnInit {
 
     schedules = [];
     cids = [];
+
+    colors: Color[] = [
+        {
+            backgroundColor: [
+                'green',
+                'green',
+                'green'
+            ]
+        }
+    ];
 
     public httpOptions = {
         headers: new HttpHeaders({
