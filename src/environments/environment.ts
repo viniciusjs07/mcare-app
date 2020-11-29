@@ -5,6 +5,6 @@
 
 export const environment = {
     production: false,
-    // url: 'https://good-doctor-api.herokuapp.com/'
-    url: 'http://localhost:3000/'
+    url: 'https://good-doctor-api.herokuapp.com/'
+    // url: 'http://localhost:3000/'
 };

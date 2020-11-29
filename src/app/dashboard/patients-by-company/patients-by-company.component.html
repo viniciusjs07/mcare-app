@@ -1,3 +1,17 @@
-<p>
-  patients-by-company works!
-</p>
+<div class="main-chart">
+    <div style="display: block;">
+        <ng-container *ngIf="barChartData[0].data.length else noData">
+            <canvas baseChart
+                    [datasets]="barChartData"
+                    [labels]="barChartLabels"
+                    [options]="barChartOptions"
+                    [plugins]="barChartPlugins"
+                    [legend]="barChartLegend"
+                    [chartType]="barChartType">
+            </canvas>
+        </ng-container>
+        <ng-template #noData>
+            <h2 class="text-center pt-5 mt-5">Sem dados</h2>
+        </ng-template>
+    </div>
+</div>

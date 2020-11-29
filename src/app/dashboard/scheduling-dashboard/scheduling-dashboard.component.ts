@@ -38,8 +38,6 @@ export class SchedulingDashboardComponent implements OnInit {
     selectedInitialDate = '';
     selectedFinalDate = '';
     API_SCHEDULE_PROFESSIONAL = 'services/scheduling/professional/';
-    API_PACIENTS = 'patients/get_by_company';
-    API_SCHEDULE_BY_CID = 'services/scheduling_get_by_cid';
 
     scheduleProfessional = new FormGroup({
         date: new FormControl('', []),
