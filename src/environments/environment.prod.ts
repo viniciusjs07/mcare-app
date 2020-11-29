@@ -1,5 +1,5 @@
 export const environment = {
-  production: true,
-  // url: 'https://mcare-api.herokuapp.com/'
-  url: 'http://localhost:3000/'
+    production: true,
+    url: 'https://good-doctor-api.herokuapp.com/',
+    // url: 'http://localhost:3000/'
 };

@@ -16,7 +16,6 @@ import {LoginComponent} from './login/login.component';
 import {HttpClientModule} from '@angular/common/http';
 import {LoginService} from './login/login.service';
 
-
 @NgModule({
     imports: [
         BrowserAnimationsModule,
@@ -33,9 +32,9 @@ import {LoginService} from './login/login.service';
     declarations: [
         AppComponent,
         AdminLayoutComponent,
-        LoginComponent
-    ],
+        LoginComponent],
     providers: [LoginService],
+    exports: [],
     bootstrap: [AppComponent]
 })
 export class AppModule {

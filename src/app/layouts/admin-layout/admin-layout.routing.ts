@@ -18,8 +18,8 @@ import { AddServicoComponent } from 'app/servicos/add-servico/add-servico.compon
 import { AddFuncionarioComponent } from 'app/funcionarios/add-funcionario/add-funcionario.component';
 import { AddProfissionalComponent } from 'app/profissional-de-saude/add-profissional/add-profissional.component';
 import { PrescricaoComponent } from 'app/agendamentos/prescricao/prescricao.component';
-import { PlanoDeSaudeComponent } from 'app/plano-de-saude/plano-de-saude.component';
 import { ExamesComponent } from 'app/exames/exames.component';
+import {DashboardComponent} from '../../dashboard/dashboard.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'relatorios',      component: HomeComponent },
@@ -44,6 +44,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'agendamentos/addAgendamento',  component: AddAgendamentoComponent},
     { path: 'agendamentos/:id/Editar',  component: AddAgendamentoComponent},
     { path: 'agendamentos/prescricao/PDF',  component: PrescricaoComponent},
-    { path: 'Planos', component: PlanoDeSaudeComponent},
-    { path: 'Exames', component: ExamesComponent}
+    { path: 'Exames', component: ExamesComponent},
+    { path: 'dashboard', component: DashboardComponent},
 ];

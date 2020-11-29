@@ -4,7 +4,7 @@
 // The list of which env maps to which file can be found in `angular-cli.json`.
 
 export const environment = {
-  production: false,
-  // url: 'https://mcare-api.herokuapp.com/',
-  url: 'http://localhost:3000/'
+    production: false,
+    url: 'https://good-doctor-api.herokuapp.com/'
+    // url: 'http://localhost:3000/'
 };
