@@ -26,13 +26,20 @@
 </div>
 
 <div class="main-chart">
+    <ng-container *ngIf="pieChartData.length else noData">
     <canvas baseChart
             [data]="pieChartData"
             [labels]="pieChartLabels"
             [chartType]="pieChartType"
             [options]="pieChartOptions"
             [plugins]="pieChartPlugins"
+            [colors]="colors"
             [legend]="pieChartLegend">
     </canvas>
+    </ng-container>
+    <ng-template #noData>
+        <h2 class="text-center pt-5 mt-5">Sem dados</h2>
+    </ng-template>
 </div>
+
 

@@ -41,13 +41,6 @@
                     <option *ngFor="let professional of professionals"  value="{{professional['_id']}}">{{professional['name']}}</option>
                 </select>
               </div>
-              <div class="col-md-6" *ngIf="professionals.length > 0">
-                <label>Porcentagem Profissional:</label>
-                <select class="form-control" id='percentValue' >
-                    <option selected value="" disabled>Selecione a porcentagem recebida Profissional.</option>
-                    <option *ngFor="let percent of getProfessionalPercents()" value="{{percent}}">{{percentToString(percent)}}</option>
-                </select>
-              </div>
             </div>
           </form><br>
           <div class="col-md-12 center-block" *ngIf="!report || report.length === 0">

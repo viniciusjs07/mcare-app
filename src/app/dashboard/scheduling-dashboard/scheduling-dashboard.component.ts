@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {Label, monkeyPatchChartJsTooltip, SingleDataSet, monkeyPatchChartJsLegend} from 'ng2-charts';
+import {Label, monkeyPatchChartJsTooltip, SingleDataSet, monkeyPatchChartJsLegend, Color} from 'ng2-charts';
 import {ChartType, ChartOptions} from 'chart.js';
 import {environment} from '../../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {FormControl, FormGroup} from '@angular/forms';
+import {NotificacoesService} from '../../servicos/notificacoes.service';
 
 @Component({
     selector: 'app-scheduling-dashboard',
@@ -19,16 +20,24 @@ export class SchedulingDashboardComponent implements OnInit {
     };
 
     public pieChartLabels: Label[] = [['Atendidos'], ['Não atendidos']];
-    public pieChartData: SingleDataSet = [300, 500];
+    public pieChartData: SingleDataSet = [];
     public pieChartType: ChartType = 'pie';
     public pieChartLegend = true;
     public pieChartPlugins = [];
+    colors: Color[] = [
+        {
+            backgroundColor: [
+                'green',
+                'gray'
+            ]
+        }
+    ];
 
     professionals = [];
     selectedProfessional = '';
     selectedInitialDate = '';
     selectedFinalDate = '';
-    API_SCHEDULE = 'services/scheduling/all_count/';
+    API_SCHEDULE = 'services/scheduling/professional/';
 
     scheduleProfessional = new FormGroup({
         date: new FormControl('', []),
@@ -42,7 +51,8 @@ export class SchedulingDashboardComponent implements OnInit {
         })
     };
 
-    constructor(private readonly http: HttpClient) {
+    constructor(private readonly http: HttpClient,
+                private readonly _notificationService: NotificacoesService) {
         monkeyPatchChartJsTooltip();
         monkeyPatchChartJsLegend();
     }
@@ -86,7 +96,20 @@ export class SchedulingDashboardComponent implements OnInit {
             const request = this.http.get(apiRoute, this.httpOptions);
             request.subscribe(
                 (response) => {
+                    if (response['attended'] === 0 && response['not_attended'] === 0) {
+                        this._notificationService.showNotification(
+                            'top',
+                            'right',
+                            'Sem agendamentos nesse intervalo de tempo.',
+                            1,
+                            'pe-7s-close'
+                        );
+                        this.pieChartData = [];
+                        return;
+                    }
                     this.pieChartData = [response['attended'], response['not_attended']];
+                    console.log('response ', this.pieChartData);
+
                 }, (err) => {
                     console.log(err);
                 }

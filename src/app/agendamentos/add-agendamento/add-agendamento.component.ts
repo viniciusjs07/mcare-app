@@ -79,9 +79,9 @@ export class AddAgendamentoComponent implements OnInit {
     };
 
     constructor(
-        public router: Router,
-        public _notificationService: NotificacoesService,
-        public http: HttpClient
+        readonly router: Router,
+        readonly _notificationService: NotificacoesService,
+        readonly http: HttpClient
     ) {
     }
 

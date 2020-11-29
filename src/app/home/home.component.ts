@@ -36,11 +36,9 @@ export class HomeComponent implements OnInit {
     public radioValue = 1;
     public professionals = [];
     public report: any;
-    public reportKeys = [];
-    public professionaPercent = 0;
 
     constructor(public http: HttpClient,
-                public _notificationService: NotificacoesService,) {
+                public _notificationService: NotificacoesService) {
     }
 
     ngOnInit() {
@@ -93,10 +91,6 @@ export class HomeComponent implements OnInit {
     public generateSingleReport() {
         const apiUrl = environment.url + 'professionals/report/single';
         const request = this.http.post(apiUrl, this.reportForm.value, this.httpOptions);
-        const e = document.getElementById('percentValue');
-        const professionaPercent = parseInt(e['options'][e['selectedIndex']]['value']);
-        this.professionaPercent = professionaPercent;
-
         request.subscribe(
             (response) => {
                 this.report = response;
@@ -137,22 +131,10 @@ export class HomeComponent implements OnInit {
     formatDate(date) {
         if (date != null) {
             const splitted = date.split('-', 3);
-
             const year = splitted[0];
             const month = splitted[1];
             const day = splitted[2];
-
             return day + '/' + month + '/' + year;
         }
     }
-
-    getProfessionalPercents() {
-        return PROFESSIONAL_PERCENTS;
-    }
-
-    percentToString(percent) {
-        return percent.toString() + ' %';
-    }
 }
-
-const PROFESSIONAL_PERCENTS = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100];
