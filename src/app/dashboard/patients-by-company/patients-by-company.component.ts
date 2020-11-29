@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ChartOptions, ChartType, ChartDataSets} from 'chart.js';
-import {Label} from 'ng2-charts';
+import {Color, Label} from 'ng2-charts';
 
 @Component({
     selector: 'app-patients-by-company',
@@ -30,6 +30,17 @@ export class PatientsByCompanyComponent implements OnInit {
     public barChartType: ChartType = 'bar';
     public barChartLegend = true;
     public barChartPlugins = [];
+
+
+    colors: Color[] = [
+        {
+            backgroundColor: [
+                'green',
+                'green',
+                'green'
+            ]
+        }
+    ];
 
     public barChartData: ChartDataSets[] = [
         {data: [], label: 'Quantidade de pacientes'}
