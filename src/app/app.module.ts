@@ -32,11 +32,9 @@ import {LoginService} from './login/login.service';
     declarations: [
         AppComponent,
         AdminLayoutComponent,
-        LoginComponent
-    ],
+        LoginComponent],
     providers: [LoginService],
-    exports: [
-    ],
+    exports: [],
     bootstrap: [AppComponent]
 })
 export class AppModule {

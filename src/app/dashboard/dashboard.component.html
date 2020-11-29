@@ -11,9 +11,15 @@
     </div>
 
 
-  <ng-container [ngSwitch]="state">
-    <ng-template [ngSwitchCase]="SCHEDULE_PROFESSIONAL">
-      <app-scheduling-dashboard></app-scheduling-dashboard>
-    </ng-template>
-  </ng-container>
+    <ng-container [ngSwitch]="state">
+        <ng-template [ngSwitchCase]="SCHEDULE_PROFESSIONAL">
+            <app-scheduling-dashboard></app-scheduling-dashboard>
+        </ng-template>
+        <ng-template [ngSwitchCase]="SCHEDULE_CID">
+            <app-scheduling-cid></app-scheduling-cid>
+        </ng-template>
+        <ng-template [ngSwitchCase]="COMPANY_PATIENT">
+            <app-patients-by-company></app-patients-by-company>
+        </ng-template>
+    </ng-container>
 </div>

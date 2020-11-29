@@ -37,7 +37,9 @@ export class SchedulingDashboardComponent implements OnInit {
     selectedProfessional = '';
     selectedInitialDate = '';
     selectedFinalDate = '';
-    API_SCHEDULE = 'services/scheduling/professional/';
+    API_SCHEDULE_PROFESSIONAL = 'services/scheduling/professional/';
+    API_PACIENTS = 'patients/get_by_company';
+    API_SCHEDULE_BY_CID = 'services/scheduling_get_by_cid';
 
     scheduleProfessional = new FormGroup({
         date: new FormControl('', []),
@@ -91,7 +93,7 @@ export class SchedulingDashboardComponent implements OnInit {
 
     refreshData() {
         if (this.selectedProfessional && this.selectedInitialDate && this.selectedFinalDate) {
-            const apiRoute = environment.url + this.API_SCHEDULE +
+            const apiRoute = environment.url + this.API_SCHEDULE_PROFESSIONAL +
                 this.selectedProfessional + `?initial_date=${this.selectedInitialDate}&final_date=${this.selectedFinalDate}`;
             const request = this.http.get(apiRoute, this.httpOptions);
             request.subscribe(

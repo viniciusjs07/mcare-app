@@ -31,6 +31,8 @@ import {ExamesComponent} from 'app/exames/exames.component';
 import {DashboardComponent} from '../../dashboard/dashboard.component';
 import {SchedulingDashboardComponent} from '../../dashboard/scheduling-dashboard/scheduling-dashboard.component';
 import {ChartsModule} from 'ng2-charts';
+import {PatientsByCompanyComponent} from '../../dashboard/patients-by-company/patients-by-company.component';
+import {SchedulingCidComponent} from '../../dashboard/scheduling-cid/scheduling-cid.component';
 
 @NgModule({
     imports: [
@@ -58,6 +60,8 @@ import {ChartsModule} from 'ng2-charts';
         AgendamentosComponent,
         AddPacienteComponent,
         SchedulingDashboardComponent,
+        PatientsByCompanyComponent,
+        SchedulingCidComponent,
         AddAgendamentoComponent,
         AddServicoComponent,
         AddFuncionarioComponent,
